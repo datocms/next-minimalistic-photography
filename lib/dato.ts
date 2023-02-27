@@ -1,10 +1,6 @@
 import "server-only";
 
-import {
-	GraphQLClient,
-	request as graphqlRequest,
-	Variables,
-} from "graphql-request";
+import { GraphQLClient, Variables } from "graphql-request";
 import { RequestDocument } from "graphql-request/dist/types";
 import { TypedDocumentNode } from "@graphql-typed-document-node/core";
 import { cache } from "react";

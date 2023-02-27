@@ -1,5 +1,6 @@
 import './globals.css';
 import { Playfair_Display, Poppins } from 'next/font/google';
+import { ActiveLink } from '@/components/ActiveLink';
 
 const playfairDisplay = Playfair_Display({
   variable: '--font-playfair-display',
@@ -11,7 +12,7 @@ const playfairDisplay = Playfair_Display({
 const poppins = Poppins({
   variable: '--font-poppins',
   display: 'swap',
-  weight: '400',
+  weight: ['400', '700'],
   subsets: ['latin'],
 });
 
@@ -30,6 +31,29 @@ export default function RootLayout({
       <body
         className={`${playfairDisplay.variable} ${poppins.variable} font-sans overflow-x-hidden`}
       >
+        <div className="fixed flex z-10 left-0 px-10 py-4 top-10 uppercase font-bold space-x-4 backdrop-brightness-150 bg-white/40">
+          <ActiveLink
+            segment={null}
+            activeClassName="underline decoration-[#f4cf58] decoration-4 underline-offset-4 underline"
+            href="/"
+          >
+            Home
+          </ActiveLink>
+          <ActiveLink
+            activeClassName="underline decoration-[#f4cf58] decoration-4 underline-offset-4"
+            href="/about"
+            segment="about"
+          >
+            About
+          </ActiveLink>
+          <ActiveLink
+            activeClassName="underline decoration-[#f4cf58] decoration-4 underline-offset-4"
+            href="/contact"
+            segment="contact"
+          >
+            Contact
+          </ActiveLink>
+        </div>
         {children}
       </body>
     </html>

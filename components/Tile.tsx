@@ -1,19 +1,11 @@
 import { ReactNode } from 'react';
 
-export function Tile({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
+export function Tile({ children }: { children: ReactNode }) {
   return (
-    <div
-      className={`flex items-stretch justify-items-stretch min-w-max ${
-        className || ''
-      }`}
-    >
-      <div className="flex items-stretch justify-items-stretch">{children}</div>
+    <div className="lg:flex lg:items-stretch lg:justify-items-stretch lg:min-w-max">
+      <div className="lg:flex lg:items-stretch lg:justify-items-stretch">
+        {children}
+      </div>
     </div>
   );
 }

@@ -1,14 +1,15 @@
 'use client';
 
+import useMediaQuery from 'beautiful-react-hooks/useMediaQuery';
 import { useRef, useEffect, ReactNode } from 'react';
 
-export function useHorizontalScroll() {
+export function useHorizontalScroll(enabled: boolean) {
   const elRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = elRef.current;
 
-    if (el) {
+    if (el && enabled) {
       const onWheel = (e: WheelEvent) => {
         if (e.deltaY === 0) return;
 
@@ -23,17 +24,18 @@ export function useHorizontalScroll() {
 
       return () => el.removeEventListener('wheel', onWheel);
     }
-  }, []);
+  }, [enabled]);
 
   return elRef;
 }
 
 export function HorizontalScroller({ children }: { children: ReactNode }) {
-  const scrollRef = useHorizontalScroll();
+  const isLarge = useMediaQuery('(min-width: 1024px)');
+  const scrollRef = useHorizontalScroll(isLarge);
 
   return (
     <div
-      className="fixed inset-0 overflow-x-auto flex items-stretch"
+      className="lg:fixed lg:inset-0 lg:overflow-x-auto lg:flex lg:items-stretch"
       ref={scrollRef}
     >
       {children}

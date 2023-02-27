@@ -14,12 +14,12 @@ export async function HomeHero() {
   }
 
   return (
-    <div className="w-[60vw] max-w-[900px] flex items-center justify-items-center p-32">
+    <div className="mx-7 py-12 lg:mg-0 lg:w-[60vw] lg:max-w-[900px] lg:flex lg:items-center lg:justify-items-center lg:p-32">
       <div>
-        <div className="mb-20 uppercase text-stone-600 tracking-widest text-sm">
+        <div className="uppercase text-stone-600 tracking-widest text-sm mb-12 lg:mb-20">
           {homepage.title}
         </div>
-        <h1 className="font-serif text-8xl mb-12">
+        <h1 className="font-serif mb-12 text-5xl lg:text-8xl">
           <StructuredTextHighlight
             data={homepage.tagline.value as StructuredTextDocument}
           />

@@ -11,18 +11,19 @@ export function Work({
 }) {
   return (
     <div className="relative" style={{ counterIncrement: 'work-counter' }}>
-      <div className="px-10">
+      <div className="lg:px-10">
         <DatoImage
-          pictureStyle={{ width: 'auto', height: '100vh' }}
+          pictureClassName="lg:w-auto lg:h-screen"
+          layout="responsive"
           data={work.coverImage.responsiveImage}
-          sizes={`${
+          sizes={`100vw, (min-width: 1024px) ${
             (work.coverImage.responsiveImage.width /
               work.coverImage.responsiveImage.height) *
             100
           }vh`}
         />
       </div>
-      <div className="absolute z-10 bottom-[250px] left-0 -rotate-90 origin-top-left flex items-center">
+      <div className="hidden lg:flex absolute z-10 bottom-[250px] left-0 -rotate-90 origin-top-left items-center">
         <div className="before:content-[counter(work-counter)]" />
         <div className="h-[2px] w-[100px] mx-2 bg-black" />
         <div>{total}</div>
