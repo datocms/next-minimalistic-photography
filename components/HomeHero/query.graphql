@@ -1,0 +1,11 @@
+query HomeHero {
+  homepage {
+    title
+    tagline {
+      value
+    }
+    description {
+      value
+    }
+  }
+}
