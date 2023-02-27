@@ -1,4 +1,3 @@
-import { DatoImage } from '@/components/DatoImage';
 import { HomeHero } from '@/components/HomeHero';
 import { HorizontalScroller } from '@/components/HorizontalScroller';
 import { Tile } from '@/components/Tile';
