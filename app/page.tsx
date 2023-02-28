@@ -27,7 +27,7 @@ const query = gql`
       }
     }
 
-    works: allWorks {
+    works: allWorks(orderBy: position_ASC) {
       id
       coverImage {
         responsiveImage(imgixParams: { auto: format, h: 1400 }) {
