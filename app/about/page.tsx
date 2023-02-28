@@ -1,14 +1,53 @@
 import { DatoImage } from '@/components/DatoImage';
-import { AboutDocument } from '@/graphql/generated';
-import { request } from '@/lib/dato';
+import { AboutQuery } from '@/graphql/generated';
+import { gql, request } from '@/lib/dato';
 import { renderMetaTags } from 'react-datocms/seo';
 import {
   StructuredText,
   StructuredTextDocument,
 } from 'react-datocms/structured-text';
 
+const query = gql`
+  query About {
+    about {
+      _seoMetaTags {
+        tag
+        attributes
+        content
+      }
+
+      kicker
+      title
+      subtitle {
+        value
+      }
+      content {
+        value
+      }
+      signature {
+        responsiveImage(imgixParams: { auto: format, w: 800 }) {
+          src
+          srcSet
+          base64
+          width
+          height
+        }
+      }
+      image {
+        responsiveImage(imgixParams: { auto: format, h: 1400 }) {
+          src
+          srcSet
+          base64
+          width
+          height
+        }
+      }
+    }
+  }
+`;
+
 export default async function Home() {
-  const { about } = await request(AboutDocument);
+  const { about } = await request<AboutQuery>(query);
 
   if (!about) {
     return null;

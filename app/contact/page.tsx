@@ -1,16 +1,32 @@
-import { ContactDocument } from '@/graphql/generated';
-import { request } from '@/lib/dato';
+import { gql, request } from '@/lib/dato';
 import { renderMetaTags } from 'react-datocms/seo';
 import {
   StructuredText,
   StructuredTextDocument,
 } from 'react-datocms/structured-text';
-
 import { ContactForm } from '@/components/ContactForm';
 import { WhatsappIcon } from '@/components/WhatsappIcon';
+import { ContactQuery } from '@/graphql/generated';
+
+const query = gql`
+  query Contact {
+    contact {
+      _seoMetaTags {
+        tag
+        attributes
+        content
+      }
+      kicker
+      title
+      content {
+        value
+      }
+    }
+  }
+`;
 
 export default async function Home() {
-  const { contact } = await request(ContactDocument);
+  const { contact } = await request<ContactQuery>(query);
 
   if (!contact) {
     return null;

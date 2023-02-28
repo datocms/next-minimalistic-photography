@@ -2,23 +2,21 @@
 
 import Link from 'next/link';
 import { ComponentProps } from 'react';
-import { useSelectedLayoutSegment } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 export function ActiveLink({
-  segment,
   activeClassName,
   ...props
 }: ComponentProps<typeof Link> & {
-  segment: string | null;
   activeClassName?: string;
 }) {
-  const activeSegment = useSelectedLayoutSegment();
+  const pathname = usePathname();
 
   return (
     <Link
       {...props}
       className={`${'className' in props ? props.className : ''} ${
-        activeSegment === segment ? activeClassName : ''
+        props.href === pathname ? activeClassName : ''
       }`}
     />
   );

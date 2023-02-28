@@ -14,7 +14,7 @@ const config: IGraphQLConfig = {
 			},
 		},
 	],
-	documents: "./**/*.graphql",
+	documents: "./**/*.tsx",
 	extensions: {
 		codegen: {
 			generates: {

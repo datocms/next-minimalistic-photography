@@ -2,20 +2,56 @@ import { HorizontalScroller } from '@/components/HorizontalScroller';
 import { Tile } from '@/components/Tile';
 import { UnwrapStructuredText } from '@/components/UnwrapStructuredText';
 import { Work } from '@/components/Work';
-import { HomeDocument } from '@/graphql/generated';
-import { request } from '@/lib/dato';
+import { HomeDocument, HomeQuery } from '@/graphql/generated';
+import { gql, request } from '@/lib/dato';
 import { renderMetaTags } from 'react-datocms/seo';
 import {
   StructuredText,
   StructuredTextDocument,
 } from 'react-datocms/structured-text';
 
+const query = gql`
+  query Home {
+    homepage {
+      _seoMetaTags {
+        tag
+        attributes
+        content
+      }
+      title
+      tagline {
+        value
+      }
+      description {
+        value
+      }
+    }
+
+    works: allWorks {
+      id
+      coverImage {
+        responsiveImage(imgixParams: { auto: format, h: 1400 }) {
+          src
+          srcSet
+          base64
+          width
+          height
+        }
+      }
+    }
+
+    meta: _allWorksMeta {
+      count
+    }
+  }
+`;
+
 export default async function Home() {
   const {
     homepage,
     works,
     meta: { count },
-  } = await request(HomeDocument);
+  } = await request<HomeQuery>(query);
 
   return (
     <main style={{ counterReset: 'work-counter' }}>

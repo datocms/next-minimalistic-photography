@@ -3,11 +3,13 @@ import { Playfair_Display, Poppins } from 'next/font/google';
 import { ActiveLink } from '@/components/ActiveLink';
 import { WhatsappIcon } from '@/components/WhatsappIcon';
 import { NavigationMenu } from '@/components/NavigationMenu';
-import { request } from '@/lib/dato';
+import { gql, request } from '@/lib/dato';
 import { LayoutDocument, LayoutQuery } from '@/graphql/generated';
 import { CSSProperties } from 'react';
 import type { Metadata } from 'next';
 import { renderMetaTags } from 'react-datocms/seo';
+
+export const revalidate = 5;
 
 const playfairDisplay = Playfair_Display({
   variable: '--font-playfair-display',
@@ -27,12 +29,36 @@ function colorToRule(color: { red: number; green: number; blue: number }) {
   return `${color.red} ${color.green} ${color.blue}`;
 }
 
+const query = gql`
+  query Layout {
+    site: _site {
+      faviconMetaTags {
+        tag
+        attributes
+        content
+      }
+    }
+    homepage {
+      accentColor {
+        red
+        green
+        blue
+      }
+      highlightColor {
+        red
+        green
+        blue
+      }
+    }
+  }
+`;
+
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { homepage, site } = await request(LayoutDocument);
+  const { homepage, site } = await request<LayoutQuery>(query);
 
   return (
     <html lang="en">

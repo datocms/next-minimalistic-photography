@@ -1,22 +1,36 @@
 import "server-only";
 
-import { GraphQLClient, Variables } from "graphql-request";
-import { RequestDocument } from "graphql-request/dist/types";
-import { TypedDocumentNode } from "@graphql-typed-document-node/core";
 import { cache } from "react";
 
-const graphQLClient = new GraphQLClient("https://graphql.datocms.com/", {
-	fetch,
-});
-
-function rawRequest<TDocument = unknown>(
-	document: RequestDocument | TypedDocumentNode<TDocument, Variables>,
-	variables?: Variables,
-) {
-	return graphQLClient.request<TDocument, Variables>(document, variables, {
-		Authorization: `Bearer ${process.env.DATOCMS_API_TOKEN}`,
-		"X-Exclude-Invalid": "true",
-	});
+export function gql(template: TemplateStringsArray) {
+	return template[0];
 }
 
-export const request = cache(rawRequest);
+const dedupableRequest = cache(
+	async <TDocument = unknown>(payload: string): Promise<TDocument> => {
+		const request = await fetch("https://graphql.datocms.com/", {
+			headers: {
+				Authorization: `Bearer ${process.env.DATOCMS_API_TOKEN}`,
+				"X-Exclude-Invalid": "true",
+				"Content-Type": "application/json",
+			},
+			method: "POST",
+			body: payload,
+		});
+
+		if (!request.ok) {
+			throw new Error(`Failed request ${payload}`);
+		}
+
+		const result = await request.json();
+
+		return result.data;
+	},
+);
+
+export async function request<TDocument = unknown, TVariables = unknown>(
+	query: string,
+	variables?: TVariables,
+): Promise<TDocument> {
+	return dedupableRequest<TDocument>(JSON.stringify({ query, variables }));
+}
