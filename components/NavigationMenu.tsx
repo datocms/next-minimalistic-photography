@@ -37,8 +37,8 @@ export function NavigationMenu() {
         <MenuItem href="/contact" segment="contact">
           Contact
         </MenuItem>
-        <Link href="https://wa.me/393491769335" className="p-4">
-          <WhatsappIcon />
+        <Link href="https://wa.me/message/22R7RKDSMVMYC1" className="p-4">
+          <WhatsappIcon className="w-[1em]" />
         </Link>
       </div>
     </>

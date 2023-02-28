@@ -1,56 +1,50 @@
-import { DatoImage } from '@/components/DatoImage';
-import { AboutDocument } from '@/graphql/generated';
+import { ContactDocument } from '@/graphql/generated';
 import { request } from '@/lib/dato';
-import { Metadata } from 'next';
 import { renderMetaTags } from 'react-datocms/seo';
 import {
   StructuredText,
   StructuredTextDocument,
 } from 'react-datocms/structured-text';
 
-export default async function Home() {
-  const { about } = await request(AboutDocument);
+import { ContactForm } from '@/components/ContactForm';
+import { WhatsappIcon } from '@/components/WhatsappIcon';
 
-  if (!about) {
+export default async function Home() {
+  const { contact } = await request(ContactDocument);
+
+  if (!contact) {
     return null;
   }
 
   return (
-    <main>
-      {renderMetaTags(about._seoMetaTags)}
-      <div className="mx-7 py-12 max-w-[700px] xl:m-0 xl:w-[50vw] xl:max-w-[1100px] xl:p-32 overflow-auto xl:box-border">
+    <main className="lg:fixed lg:inset-0 lg:flex lg:items-center lg:justify-center">
+      {renderMetaTags(contact._seoMetaTags)}
+      <div className="mx-7 py-12 max-w-[700px] lg:m-0 lg:pr-32 lg:box-border">
         <div>
-          <div className="uppercase tracking-widest text-sm mb-12 xl:mb-20 xl:mt-16">
-            {about.kicker}
+          <div className="uppercase tracking-widest text-sm mb-12 xl:mb-20">
+            {contact.kicker}
           </div>
-          <h1 className="text-black font-serif mb-12 text-5xl xl:text-8xl tracking-tight">
-            {about.title}
+          <h1 className="text-black font-serif mb-12 text-5xl lg:text-8xl tracking-tight">
+            {contact.title}
           </h1>
-          <div className="text-xl mb-12 leading-loose">
-            <StructuredText
-              data={about.subtitle.value as StructuredTextDocument}
-            />
-          </div>
           <div className="prose max-w-none">
             <StructuredText
-              data={about.content.value as StructuredTextDocument}
+              data={contact.content.value as StructuredTextDocument}
             />
           </div>
-        </div>
-        <div className="mt-10 flex justify-end">
-          <DatoImage data={about.signature.responsiveImage} />
+          <div className="mt-5">
+            <a
+              href="https://wa.me/message/22R7RKDSMVMYC1"
+              className="w-full font-bold flex space-x-4 items-center text-[#128c7e] underline underline-offset-2 decoration-[#128c7e]"
+            >
+              <WhatsappIcon className="w-[2em]" />
+              <span>Send me a WhatsApp message</span>
+            </a>
+          </div>
         </div>
       </div>
-      <div className="hidden xl:block xl:fixed xl:inset-0 xl:left-auto xl:w-[50vw]">
-        <DatoImage
-          layout="fill"
-          data={about.image.responsiveImage}
-          objectFit="cover"
-          objectPosition="50% 50%"
-        />
-      </div>
-      <div className="xl:hidden">
-        <DatoImage layout="responsive" data={about.image.responsiveImage} />
+      <div className="mx-7 py-12 lg:mx-0 lg:py-0 lg:flex lg:items-center lg:justify-center">
+        <ContactForm />
       </div>
     </main>
   );

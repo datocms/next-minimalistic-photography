@@ -17,7 +17,7 @@ export default async function Home() {
   return (
     <main>
       {renderMetaTags(about._seoMetaTags)}
-      <div className="mx-7 py-12 max-w-[700px] xl:m-0 xl:w-[50vw] xl:max-w-[1100px] xl:p-32 overflow-auto xl:box-border">
+      <div className="mx-7 py-12 max-w-[800px] xl:m-0 lg:w-[55vw] 2xl:w-[50vw] lg:max-w-[1100px] xl:p-32 overflow-auto xl:box-border">
         <div>
           <div className="uppercase tracking-widest text-sm mb-12 xl:mb-20 xl:mt-16">
             {about.kicker}
@@ -40,7 +40,7 @@ export default async function Home() {
           <DatoImage data={about.signature.responsiveImage} sizes="100vw" />
         </div>
       </div>
-      <div className="hidden xl:block xl:fixed xl:inset-0 xl:left-auto xl:w-[50vw]">
+      <div className="hidden xl:block fixed inset-0 left-auto w-[45vw] 2xl:w-[50vw]">
         <DatoImage
           layout="fill"
           data={about.image.responsiveImage}

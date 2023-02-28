@@ -1,36 +1,12 @@
-query About {
-  about {
+query Contact {
+  contact {
     _seoMetaTags {
       tag
       attributes
       content
     }
-
     kicker
     title
-    subtitle {
-      value
-    }
-    content {
-      value
-    }
-    signature {
-      responsiveImage(imgixParams: { auto: format, w: 800 }) {
-        src
-        srcSet
-        base64
-        width
-        height
-      }
-    }
-    image {
-      responsiveImage(imgixParams: { auto: format, h: 1400 }) {
-        src
-        srcSet
-        base64
-        width
-        height
-      }
-    }
+    content { value }
   }
 }
