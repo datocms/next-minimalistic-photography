@@ -14,8 +14,8 @@ function MenuItem({
   return (
     <ActiveLink
       segment={segment}
-      className="p-4 decoration-[#f4cf58] decoration-4 underline-offset-4 hover:underline"
-      activeClassName="underline"
+      className="p-4 decoration-accent decoration-4 underline-offset-4 hover:underline hover:decoration-accent/25"
+      activeClassName="underline hover:decoration-accent"
       href={href}
     >
       {children}
@@ -26,8 +26,8 @@ function MenuItem({
 export function NavigationMenu() {
   return (
     <>
-      <div className="h-32 lg:hidden" />
-      <div className="fixed flex z-10 items-center left-0 px-2 lg:px-8 top-10 uppercase font-bold backdrop-brightness-150 bg-white/50">
+      <div className="h-32 xl:hidden" />
+      <div className="fixed flex z-10 items-center left-0 px-2 xl:px-8 top-10 uppercase font-bold backdrop-brightness-150 text-black bg-white/50">
         <MenuItem segment={null} href="/">
           Home
         </MenuItem>

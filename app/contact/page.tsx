@@ -1,6 +1,7 @@
 import { DatoImage } from '@/components/DatoImage';
 import { AboutDocument } from '@/graphql/generated';
 import { request } from '@/lib/dato';
+import { Metadata } from 'next';
 import { renderMetaTags } from 'react-datocms/seo';
 import {
   StructuredText,
@@ -37,7 +38,7 @@ export default async function Home() {
           </div>
         </div>
         <div className="mt-10 flex justify-end">
-          <DatoImage data={about.signature.responsiveImage} sizes="100vw" />
+          <DatoImage data={about.signature.responsiveImage} />
         </div>
       </div>
       <div className="hidden xl:block xl:fixed xl:inset-0 xl:left-auto xl:w-[50vw]">
@@ -46,7 +47,6 @@ export default async function Home() {
           data={about.image.responsiveImage}
           objectFit="cover"
           objectPosition="50% 50%"
-          sizes="50vw"
         />
       </div>
       <div className="xl:hidden">

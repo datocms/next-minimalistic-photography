@@ -1,0 +1,21 @@
+query Layout {
+  site: _site {
+    faviconMetaTags {
+      tag
+      attributes
+      content
+    }
+  }
+  homepage {
+    accentColor {
+      red
+      green
+      blue
+    }
+    highlightColor {
+      red
+      green
+      blue
+    }
+  }
+}

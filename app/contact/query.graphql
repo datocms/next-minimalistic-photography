@@ -1,22 +1,29 @@
-query Home {
-  homepage {
+query About {
+  about {
     _seoMetaTags {
       tag
       attributes
       content
     }
-    title
-    tagline {
-      value
-    }
-    description {
-      value
-    }
-  }
 
-  works: allWorks {
-    id
-    coverImage {
+    kicker
+    title
+    subtitle {
+      value
+    }
+    content {
+      value
+    }
+    signature {
+      responsiveImage(imgixParams: { auto: format, w: 800 }) {
+        src
+        srcSet
+        base64
+        width
+        height
+      }
+    }
+    image {
       responsiveImage(imgixParams: { auto: format, h: 1400 }) {
         src
         srcSet
@@ -26,6 +33,4 @@ query Home {
       }
     }
   }
-
-  meta: _allWorksMeta { count }
 }
