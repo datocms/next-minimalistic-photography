@@ -34,6 +34,10 @@ const query = gql`
         }
       }
       image {
+        focalPoint {
+          x
+          y
+        }
         responsiveImage(imgixParams: { auto: format, h: 1400 }) {
           src
           srcSet
@@ -84,7 +88,9 @@ export default async function Home() {
           layout="fill"
           data={about.image.responsiveImage}
           objectFit="cover"
-          objectPosition="50% 50%"
+          objectPosition={`${about.image.focalPoint.x * 100}% ${
+            about.image.focalPoint.y * 100
+          }%`}
           sizes="50vw"
         />
       </div>
