@@ -88,7 +88,7 @@ export default async function Home() {
           layout="fill"
           data={about.image.responsiveImage}
           objectFit="cover"
-          objectPosition={`${about.image.focalPoint.x * 100}% ${
+          objectPosition={`left ${about.image.focalPoint.x * 100}% top ${
             about.image.focalPoint.y * 100
           }%`}
           sizes="50vw"
