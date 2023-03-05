@@ -25,13 +25,7 @@ const query = gql`
         value
       }
       signature {
-        responsiveImage(imgixParams: { auto: format, w: 800 }) {
-          src
-          srcSet
-          base64
-          width
-          height
-        }
+        url
       }
       image {
         focalPoint {
@@ -79,8 +73,12 @@ export default async function Home() {
             />
           </div>
         </div>
-        <div className="mt-10 flex justify-end">
-          <DatoImage data={about.signature.responsiveImage} sizes="100vw" />
+        <div className="mt-10 flex">
+          <img
+            src={about.signature.url}
+            alt="Signature"
+            style={{ width: '100px' }}
+          />
         </div>
       </div>
       <div className="hidden xl:block fixed inset-0 left-auto w-[45vw] 2xl:w-[50vw]">
