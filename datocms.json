@@ -1,0 +1,11 @@
+{
+	"name": "Minimalistic Photography Website",
+	"description": "A minialistic photography portfolio website, created using Next.js 13 and DatoCMS",
+	"previewImage": "https://www.datocms-assets.com/205/1605198221-screenshot2020-11-12-next-js-blog-example-with-datocms-1.jpg?crop=top&fit=crop&h=500&w=600&auto=format",
+	"datocmsProjectId": "95283",
+	"deploymentType": "static",
+	"buildCommand": "npm run build",
+	"datocmsApiTokenEnvName": "NEXT_DATOCMS_API_TOKEN",
+	"livePreviewUrl": "https://nextjs-demo-bay.vercel.app/",
+	"postInstallUrl": "/api/post-install"
+}
