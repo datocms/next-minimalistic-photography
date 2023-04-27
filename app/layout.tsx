@@ -38,7 +38,10 @@ const query = gql`
         content
       }
     }
-    homepage {
+    contactPage {
+      phoneNumber
+    }
+    theme {
       accentColor {
         red
         green
@@ -58,7 +61,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { homepage, site } = await request<LayoutQuery>(query);
+  const { theme, site, contactPage } = await request<LayoutQuery>(query);
 
   return (
     <html lang="en">
@@ -66,15 +69,15 @@ export default async function RootLayout({
       <body
         className={`${playfairDisplay.variable} ${poppins.variable} font-sans overflow-x-hidden text-gray`}
         style={
-          homepage
+          theme
             ? ({
-                '--color-accent': colorToRule(homepage.accentColor),
-                '--color-highlight': colorToRule(homepage.highlightColor),
-              } as CSSProperties)
+              '--color-accent': colorToRule(theme.accentColor),
+              '--color-highlight': colorToRule(theme.highlightColor),
+            } as CSSProperties)
             : undefined
         }
       >
-        <NavigationMenu />
+        <NavigationMenu phoneNumber={contactPage?.phoneNumber} />
         {children}
       </body>
     </html>

@@ -1,7 +1,7 @@
 import { HorizontalScroller } from '@/components/HorizontalScroller';
 import { Tile } from '@/components/Tile';
 import { UnwrapStructuredText } from '@/components/UnwrapStructuredText';
-import { Work } from '@/components/Work';
+import { Photoshoot } from '@/components/Photoshoot';
 import { HomeDocument, HomeQuery } from '@/graphql/generated';
 import { gql, request } from '@/lib/dato';
 import { renderMetaTags } from 'react-datocms/seo';
@@ -27,7 +27,7 @@ const query = gql`
       }
     }
 
-    works: allWorks(orderBy: position_ASC) {
+    photoshoots: allPhotoshoots(orderBy: position_ASC) {
       id
       coverImage {
         responsiveImage(imgixParams: { auto: format, h: 1400 }) {
@@ -40,7 +40,7 @@ const query = gql`
       }
     }
 
-    meta: _allWorksMeta {
+    meta: _allPhotoshootsMeta {
       count
     }
   }
@@ -49,12 +49,12 @@ const query = gql`
 export default async function Home() {
   const {
     homepage,
-    works,
+    photoshoots,
     meta: { count },
   } = await request<HomeQuery>(query);
 
   return (
-    <main style={{ counterReset: 'work-counter' }}>
+    <main style={{ counterReset: 'photoshoot-counter' }}>
       {renderMetaTags(homepage?._seoMetaTags || [])}
       <HorizontalScroller>
         {homepage && (
@@ -78,9 +78,9 @@ export default async function Home() {
             </div>
           </Tile>
         )}
-        {works.map((work) => (
-          <Tile key={work.id}>
-            <Work work={work} total={count} />
+        {photoshoots.map((photoshoot) => (
+          <Tile key={photoshoot.id}>
+            <Photoshoot photoshoot={photoshoot} total={count} />
           </Tile>
         ))}
       </HorizontalScroller>

@@ -9,7 +9,7 @@ import {
 
 const query = gql`
   query About {
-    about {
+    aboutPage {
       _seoMetaTags {
         tag
         attributes
@@ -45,37 +45,37 @@ const query = gql`
 `;
 
 export default async function Home() {
-  const { about } = await request<AboutQuery>(query);
+  const { aboutPage } = await request<AboutQuery>(query);
 
-  if (!about) {
+  if (!aboutPage) {
     return null;
   }
 
   return (
     <main>
-      {renderMetaTags(about._seoMetaTags)}
+      {renderMetaTags(aboutPage._seoMetaTags)}
       <div className="mx-7 py-12 max-w-[800px] xl:m-0 lg:w-[55vw] 2xl:w-[50vw] lg:max-w-[1100px] xl:p-32 overflow-auto xl:box-border">
         <div>
           <div className="uppercase tracking-widest text-sm mb-12 xl:mb-20 xl:mt-16">
-            {about.kicker}
+            {aboutPage.kicker}
           </div>
           <h1 className="text-black font-serif mb-12 text-5xl xl:text-8xl tracking-tight">
-            {about.title}
+            {aboutPage.title}
           </h1>
           <div className="text-xl mb-12 leading-loose">
             <StructuredText
-              data={about.subtitle.value as StructuredTextDocument}
+              data={aboutPage.subtitle.value as StructuredTextDocument}
             />
           </div>
           <div className="prose max-w-none">
             <StructuredText
-              data={about.content.value as StructuredTextDocument}
+              data={aboutPage.content.value as StructuredTextDocument}
             />
           </div>
         </div>
         <div className="mt-10 flex">
           <img
-            src={about.signature.url}
+            src={aboutPage.signature.url}
             alt="Signature"
             style={{ width: '100px' }}
           />
@@ -84,16 +84,15 @@ export default async function Home() {
       <div className="hidden xl:block fixed inset-0 left-auto w-[45vw] 2xl:w-[50vw]">
         <DatoImage
           layout="fill"
-          data={about.image.responsiveImage}
+          data={aboutPage.image.responsiveImage}
           objectFit="cover"
-          objectPosition={`left ${about.image.focalPoint.x * 100}% top ${
-            about.image.focalPoint.y * 100
-          }%`}
+          objectPosition={`left ${aboutPage.image.focalPoint.x * 100}% top ${aboutPage.image.focalPoint.y * 100
+            }%`}
           sizes="50vw"
         />
       </div>
       <div className="xl:hidden">
-        <DatoImage layout="responsive" data={about.image.responsiveImage} />
+        <DatoImage layout="responsive" data={aboutPage.image.responsiveImage} />
       </div>
     </main>
   );

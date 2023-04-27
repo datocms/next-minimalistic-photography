@@ -1,3 +1,4 @@
+import { generateWhatsAppLink } from '@/lib/whatsapp';
 import Link from 'next/link';
 import { ActiveLink } from './ActiveLink';
 import { WhatsappIcon } from './WhatsappIcon';
@@ -20,7 +21,9 @@ function MenuItem({
   );
 }
 
-export function NavigationMenu() {
+export function NavigationMenu({ phoneNumber }: {
+  phoneNumber?: string | null
+}) {
   return (
     <>
       <div className="h-32 xl:hidden" />
@@ -28,9 +31,12 @@ export function NavigationMenu() {
         <MenuItem href="/">Home</MenuItem>
         <MenuItem href="/about">About</MenuItem>
         <MenuItem href="/contact">Contact</MenuItem>
-        <Link href="https://wa.me/message/22R7RKDSMVMYC1" className="p-4">
-          <WhatsappIcon className="w-[1em]" />
-        </Link>
+        {
+          phoneNumber &&
+          <Link href={generateWhatsAppLink(phoneNumber)} className="p-4">
+            <WhatsappIcon className="w-[1em]" />
+          </Link>
+        }
       </div>
     </>
   );

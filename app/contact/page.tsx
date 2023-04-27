@@ -7,10 +7,11 @@ import {
 import { ContactForm } from '@/components/ContactForm';
 import { WhatsappIcon } from '@/components/WhatsappIcon';
 import { ContactQuery } from '@/graphql/generated';
+import { generateWhatsAppLink } from '@/lib/whatsapp';
 
 const query = gql`
   query Contact {
-    contact {
+    contactPage {
       _seoMetaTags {
         tag
         attributes
@@ -21,42 +22,43 @@ const query = gql`
       content {
         value
       }
+      phoneNumber
     }
   }
 `;
 
 export default async function Home() {
-  const { contact } = await request<ContactQuery>(query);
+  const { contactPage } = await request<ContactQuery>(query);
 
-  if (!contact) {
+  if (!contactPage) {
     return null;
   }
 
   return (
     <main className="lg:fixed lg:inset-0 lg:flex lg:items-center lg:justify-center">
-      {renderMetaTags(contact._seoMetaTags)}
+      {renderMetaTags(contactPage._seoMetaTags)}
       <div className="mx-7 py-12 max-w-[700px] lg:m-0 lg:pr-32 lg:box-border">
         <div>
           <div className="uppercase tracking-widest text-sm mb-12 xl:mb-20">
-            {contact.kicker}
+            {contactPage.kicker}
           </div>
           <h1 className="text-black font-serif mb-12 text-5xl lg:text-8xl tracking-tight">
-            {contact.title}
+            {contactPage.title}
           </h1>
           <div className="prose max-w-none">
             <StructuredText
-              data={contact.content.value as StructuredTextDocument}
+              data={contactPage.content.value as StructuredTextDocument}
             />
           </div>
-          <div className="mt-5">
+          {contactPage.phoneNumber && <div className="mt-5">
             <a
-              href="https://wa.me/message/22R7RKDSMVMYC1"
+              href={generateWhatsAppLink(contactPage.phoneNumber)}
               className="w-full font-bold flex space-x-4 items-center text-[#128c7e] underline underline-offset-2 decoration-[#128c7e]"
             >
               <WhatsappIcon className="w-[2em]" />
-              <span>Send me a WhatsApp message</span>
+              <span>Prefer to chat? WhatsApp me!</span>
             </a>
-          </div>
+          </div>}
         </div>
       </div>
       <div className="mx-7 py-12 lg:mx-0 lg:py-0 lg:flex lg:items-center lg:justify-center">

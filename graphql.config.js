@@ -1,9 +1,8 @@
-import dotenv from "dotenv";
-import type { IGraphQLConfig } from "graphql-config";
+require("dotenv").config({ path: ".env.local" });
 
-dotenv.config({ path: ".env.local" });
+/** @type {import('graphql-config').IGraphQLConfig} */
 
-const config: IGraphQLConfig = {
+module.exports = {
 	schema: [
 		{
 			"https://graphql.datocms.com": {
@@ -45,5 +44,3 @@ const config: IGraphQLConfig = {
 		},
 	},
 };
-
-export default config;

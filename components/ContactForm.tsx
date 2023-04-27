@@ -112,7 +112,7 @@ export function ContactForm() {
         />
         <Field
           label="Your message*"
-          placeholder="Hi Taiza! I would like to..."
+          placeholder="Hi there! I would like to..."
           field={zo.fields.message}
           errors={zo.errors.message}
           isTextarea={true}
@@ -121,9 +121,9 @@ export function ContactForm() {
         <button
           disabled={zo.validation?.success === false}
           type="submit"
-          className="uppercase tracking-widest block w-full font-bold p-4 border bg-white border-stone-400 rounded-md drop-shadow focus:ring-2 ring-offset-2 ring-accent focus:outline-none"
+          className="uppercase tracking-widest block w-full font-bold p-4 bg-accent text-white border-accent-400 rounded-md drop-shadow focus:ring-2 ring-offset-2 ring-accent focus:outline-none hover:opacity-90 active:opacity-70"
         >
-          Send message
+          Send me a message!
         </button>
       </form>
     </div>
