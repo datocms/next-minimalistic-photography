@@ -22,6 +22,9 @@ const dedupableRequest = cache(
 			},
 			method: "POST",
 			body: payload,
+			next: {
+				revalidate: 60,
+			},
 		});
 
 		if (!request.ok) {
