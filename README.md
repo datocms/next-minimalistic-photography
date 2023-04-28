@@ -18,11 +18,9 @@ Have a look at the end result live:
 
 2. Make sure that you have set up the [Github integration on Vercel](https://vercel.com/docs/git/vercel-for-github).
 
-3. Let DatoCMS set everything up for you clicking this button:
+3. Let DatoCMS set everything up for you clicking this button: [![Deploy with DatoCMS](https://dashboard.datocms.com/deploy/button.svg)](https://dashboard.datocms.com/deploy?repo=datocms/next-minimalistic-photography:main)
 
-[![Deploy with DatoCMS](https://dashboard.datocms.com/deploy/button.svg)](https://dashboard.datocms.com/deploy?repo=datocms/next-minimalistic-photography:main)
-
-4. Setup FormSpark, which is needed for the contact form to work!
+4. Setup FormSpark (see step below), which is needed for the contact form to work!
 
 ### Setup FormSpark
 
