@@ -43,7 +43,7 @@ const query = graphql(/* GraphQL */ `
 `);
 
 export default async function Home() {
-  const { aboutPage } = await request(query);
+  const { aboutPage } = await request(query, {});
 
   if (!aboutPage) {
     return null;

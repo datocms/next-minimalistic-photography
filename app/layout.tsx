@@ -36,8 +36,6 @@ const query = graphql(/* GraphQL */ `
   }
 `);
 
-export const revalidate = 5;
-
 const playfairDisplay = Playfair_Display({
   variable: '--font-playfair-display',
   weight: '700',
