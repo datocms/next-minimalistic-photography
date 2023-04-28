@@ -1,15 +1,16 @@
 import { NextResponse } from "next/server";
 import { SchemaTypes } from "@datocms/cma-client-node";
 
+const cors = {
+	headers: {
+		"Access-Control-Allow-Origin": "*",
+		"Access-Control-Allow-Methods": "OPTIONS, POST",
+		"Access-Control-Allow-Headers": "Content-Type, Authorization",
+	},
+};
+
 export async function OPTIONS() {
-	return new Response("OK", {
-		status: 200,
-		headers: {
-			"Access-Control-Allow-Origin": "*",
-			"Access-Control-Allow-Methods": "OPTIONS, POST",
-			"Access-Control-Allow-Headers": "Content-Type, Authorization",
-		},
-	});
+	return new Response("OK", cors);
 }
 
 function generatePreviewUrl(
@@ -36,7 +37,7 @@ export async function POST(request: Request) {
 	const url = generatePreviewUrl(body.item, body.itemType, body.locale);
 
 	if (!url) {
-		return NextResponse.json({ previewLinks: [] });
+		return NextResponse.json({ previewLinks: [] }, cors);
 	}
 
 	const baseUrl = process.env.VERCEL_URL
@@ -52,5 +53,5 @@ export async function POST(request: Request) {
 		},
 	];
 
-	return NextResponse.json({ previewLinks });
+	return NextResponse.json({ previewLinks }, cors);
 }
