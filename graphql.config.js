@@ -13,7 +13,7 @@ module.exports = {
 			},
 		},
 	],
-	documents: ["./**/*.tsx", "!./gql/**/*"],
+	documents: ["./**/*.tsx"],
 	extensions: {
 		codegen: {
 			generates: {

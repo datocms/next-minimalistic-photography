@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { z } from 'zod';
-import { useZorm } from 'react-zorm';
-import Textarea from 'react-textarea-autosize';
-import { ErrorGetter, FieldGetter } from 'react-zorm/dist/types';
-import { useState } from 'react';
+import { z } from "zod";
+import { useZorm } from "react-zorm";
+import Textarea from "react-textarea-autosize";
+import { ErrorGetter, FieldGetter } from "react-zorm/dist/types";
+import { useState } from "react";
 
 const FormSchema = z.object({
   name: z.string().min(1),
@@ -38,7 +38,7 @@ function Field({
             placeholder={placeholder}
             minRows={3}
             className={`w-full border rounded resize-none border-stone-300 focus:outline-none p-3 focus:ring-2 focus:ring-accent focus:ring-offset-2 ${errors(
-              'border-red-500',
+              "border-red-500",
             )}`}
           />
         ) : (
@@ -47,7 +47,7 @@ function Field({
             name={field()}
             placeholder={placeholder}
             className={`w-full border rounded border-stone-300 focus:outline-none p-3 focus:ring-2 focus:ring-accent focus:ring-offset-2 ${errors(
-              'border-red-500',
+              "border-red-500",
             )}`}
           />
         )}
@@ -59,35 +59,52 @@ function Field({
   );
 }
 
-export function ContactForm() {
-  const [success, setSuccess] = useState(false);
+export function ContactForm({ formId }: { formId: string }) {
+  const [state, setState] = useState<"success" | "failure" | undefined>(
+    undefined,
+  );
 
-  const zo = useZorm('signup', FormSchema, {
+  const zo = useZorm("signup", FormSchema, {
     async onValidSubmit(e) {
       e.preventDefault();
-      await fetch('https://submit-form.com/1W6wQG7Z', {
-        method: 'POST',
+      const response = await fetch(`https://submit-form.com/${formId}`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(e.data),
       });
-      zo.form?.reset();
-      setSuccess(true);
+
+      if (response.ok) {
+        zo.form?.reset();
+        setState("success");
+      } else {
+        setState("failure");
+      }
     },
   });
 
   return (
     <div className="lg:w-[25vw] lg:min-w-[450px] lg:max-w-[550px]">
-      {success && (
+      {state && (
         <div className="mb-12 p-8 radius ring-4 ring-highlight">
           <div className="font-bold text-xl mb-3">
-            Thank you for reaching out! 🙏
+            {state === "success" ? (
+              <>Thank you for reaching out! 🙏</>
+            ) : (
+              <>Ouch, something went wrong! 🥺</>
+            )}
           </div>
           <div>
-            I just received the message, and I will reply you as soon as
-            possible!
+            {state === "success" ? (
+              <>
+                I just received the message, and I will reply you as soon as
+                possible!
+              </>
+            ) : (
+              <>You probably have not setup FormSpark!</>
+            )}
           </div>
         </div>
       )}

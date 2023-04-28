@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -12,14 +11,10 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** Represents `true` or `false` values. */
   BooleanType: any;
   CustomData: any;
-  /** A ISO 8601 compliant datetime value */
   DateTime: any;
-  /** Represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point). */
   FloatType: any;
-  /** Represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. */
   IntType: any;
   ItemId: any;
   JsonField: any;
@@ -2638,38 +2633,26 @@ export type FocalPoint = {
 export type AboutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AboutQuery = { __typename?: 'Query', aboutPage?: { __typename?: 'AboutPageRecord', kicker: string, title: string, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string, attributes?: any | null, content?: string | null }>, subtitle: { __typename?: 'AboutPageModelSubtitleField', value: any }, content: { __typename?: 'AboutPageModelContentField', value: any }, signature: { __typename?: 'ImageFileField', responsiveImage: (
-        { __typename?: 'ResponsiveImage' }
-        & { ' $fragmentRefs'?: { 'DatoImage_ResponsiveImageFragment': DatoImage_ResponsiveImageFragment } }
-      ) }, image: { __typename?: 'ImageFileField', focalPoint: { __typename?: 'focalPoint', x: any, y: any }, responsiveImage: (
-        { __typename?: 'ResponsiveImage' }
-        & { ' $fragmentRefs'?: { 'DatoImage_ResponsiveImageFragment': DatoImage_ResponsiveImageFragment } }
-      ) } } | null };
+export type AboutQuery = { __typename?: 'Query', aboutPage?: { __typename?: 'AboutPageRecord', kicker: string, title: string, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string, attributes?: Record<string, string> | null, content?: string | null }>, subtitle: { __typename?: 'AboutPageModelSubtitleField', value: unknown }, content: { __typename?: 'AboutPageModelContentField', value: unknown }, signature: { __typename?: 'ImageFileField', responsiveImage: { __typename?: 'ResponsiveImage', src: string, srcSet: string, base64?: string | null, width: number, height: number, alt?: string | null, title?: string | null } }, image: { __typename?: 'ImageFileField', focalPoint: { __typename?: 'focalPoint', x: number, y: number }, responsiveImage: { __typename?: 'ResponsiveImage', src: string, srcSet: string, base64?: string | null, width: number, height: number, alt?: string | null, title?: string | null } } } | null };
 
 export type ContactQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ContactQuery = { __typename?: 'Query', contactPage?: { __typename?: 'ContactPageRecord', kicker: string, title: string, phoneNumber?: string | null, formsparkFormId: string, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string, attributes?: any | null, content?: string | null }>, content: { __typename?: 'ContactPageModelContentField', value: any } } | null };
+export type ContactQuery = { __typename?: 'Query', contactPage?: { __typename?: 'ContactPageRecord', kicker: string, title: string, phoneNumber?: string | null, formsparkFormId: string, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string, attributes?: Record<string, string> | null, content?: string | null }>, content: { __typename?: 'ContactPageModelContentField', value: unknown } } | null };
 
 export type LayoutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LayoutQuery = { __typename?: 'Query', site: { __typename?: 'Site', faviconMetaTags: Array<{ __typename?: 'Tag', tag: string, attributes?: any | null, content?: string | null }> }, contactPage?: { __typename?: 'ContactPageRecord', phoneNumber?: string | null } | null, theme?: { __typename?: 'ThemeRecord', accentColor: { __typename?: 'ColorField', red: any, green: any, blue: any }, highlightColor: { __typename?: 'ColorField', red: any, green: any, blue: any } } | null };
+export type LayoutQuery = { __typename?: 'Query', site: { __typename?: 'Site', faviconMetaTags: Array<{ __typename?: 'Tag', tag: string, attributes?: Record<string, string> | null, content?: string | null }> }, contactPage?: { __typename?: 'ContactPageRecord', phoneNumber?: string | null } | null, theme?: { __typename?: 'ThemeRecord', accentColor: { __typename?: 'ColorField', red: number, green: number, blue: number }, highlightColor: { __typename?: 'ColorField', red: number, green: number, blue: number } } | null };
 
 export type HomeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HomeQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageRecord', title: string, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string, attributes?: any | null, content?: string | null }>, tagline: { __typename?: 'HomepageModelTaglineField', value: any }, description: { __typename?: 'HomepageModelDescriptionField', value: any } } | null, photoshoots: Array<(
-    { __typename?: 'PhotoshootRecord', id: any }
-    & { ' $fragmentRefs'?: { 'Photoshoot_PhotoshootFragment': Photoshoot_PhotoshootFragment } }
-  )>, meta: { __typename?: 'CollectionMetadata', count: any } };
+export type HomeQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageRecord', title: string, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string, attributes?: Record<string, string> | null, content?: string | null }>, tagline: { __typename?: 'HomepageModelTaglineField', value: unknown }, description: { __typename?: 'HomepageModelDescriptionField', value: unknown } } | null, photoshoots: Array<{ __typename?: 'PhotoshootRecord', id: string, coverImage: { __typename?: 'ImageFileField', responsiveImage: { __typename?: 'ResponsiveImage', width: number, height: number, src: string, srcSet: string, base64?: string | null, alt?: string | null, title?: string | null } } }>, meta: { __typename?: 'CollectionMetadata', count: number } };
 
-export type DatoImage_ResponsiveImageFragment = { __typename?: 'ResponsiveImage', src: string, srcSet: string, base64?: string | null, width: any, height: any, alt?: string | null, title?: string | null } & { ' $fragmentName'?: 'DatoImage_ResponsiveImageFragment' };
+export type DatoImage_ResponsiveImageFragment = { __typename?: 'ResponsiveImage', src: string, srcSet: string, base64?: string | null, width: number, height: number, alt?: string | null, title?: string | null };
 
-export type Photoshoot_PhotoshootFragment = { __typename?: 'PhotoshootRecord', coverImage: { __typename?: 'ImageFileField', responsiveImage: (
-      { __typename?: 'ResponsiveImage', width: any, height: any }
-      & { ' $fragmentRefs'?: { 'DatoImage_ResponsiveImageFragment': DatoImage_ResponsiveImageFragment } }
-    ) } } & { ' $fragmentName'?: 'Photoshoot_PhotoshootFragment' };
+export type Photoshoot_PhotoshootFragment = { __typename?: 'PhotoshootRecord', coverImage: { __typename?: 'ImageFileField', responsiveImage: { __typename?: 'ResponsiveImage', width: number, height: number, src: string, srcSet: string, base64?: string | null, alt?: string | null, title?: string | null } } };
 
 export const DatoImage_ResponsiveImageFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DatoImage_responsiveImage"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ResponsiveImage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"srcSet"}},{"kind":"Field","name":{"kind":"Name","value":"base64"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]} as unknown as DocumentNode<DatoImage_ResponsiveImageFragment, unknown>;
 export const Photoshoot_PhotoshootFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Photoshoot_photoshoot"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PhotoshootRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"coverImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"responsiveImage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"imgixParams"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"auto"},"value":{"kind":"EnumValue","value":"format"}},{"kind":"ObjectField","name":{"kind":"Name","value":"h"},"value":{"kind":"IntValue","value":"1400"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DatoImage_responsiveImage"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DatoImage_responsiveImage"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ResponsiveImage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"srcSet"}},{"kind":"Field","name":{"kind":"Name","value":"base64"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]} as unknown as DocumentNode<Photoshoot_PhotoshootFragment, unknown>;

@@ -23,6 +23,7 @@ const query = graphql(/* GraphQL */ `
         value
       }
       phoneNumber
+      formsparkFormId
     }
   }
 `);
@@ -63,7 +64,7 @@ export default async function Home() {
         </div>
       </div>
       <div className="mx-7 py-12 lg:mx-0 lg:py-0 lg:flex lg:items-center lg:justify-center">
-        <ContactForm />
+        <ContactForm formId={contactPage.formsparkFormId} />
       </div>
     </main>
   );

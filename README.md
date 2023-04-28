@@ -22,6 +22,15 @@ Have a look at the end result live:
 
 [![Deploy with DatoCMS](https://dashboard.datocms.com/deploy/button.svg)](https://dashboard.datocms.com/deploy?repo=datocms/next-minimalistic-photography:main)
 
+4. Setup FormSpark, which is needed for the contact form to work!
+
+### Setup FormSpark
+
+1. Signup to https://formspark.io/
+2. Create a new form - the first 250 form submissions are free!
+3. Go to Settings, and copy the Form ID
+4. Paste the same ID in your DatoCMS project, under the "Contact Page" > "FormSpark Form ID" field.
+
 ### Local setup
 
 Once the setup of the project and repo is done, clone the repo locally.
