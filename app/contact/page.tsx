@@ -1,4 +1,4 @@
-import { gql, request } from '@/lib/dato';
+import { request } from '@/lib/dato';
 import { renderMetaTags } from 'react-datocms/seo';
 import {
   StructuredText,
@@ -6,10 +6,10 @@ import {
 } from 'react-datocms/structured-text';
 import { ContactForm } from '@/components/ContactForm';
 import { WhatsappIcon } from '@/components/WhatsappIcon';
-import { ContactQuery } from '@/graphql/generated';
 import { generateWhatsAppLink } from '@/lib/whatsapp';
+import { graphql } from '@/gql';
 
-const query = gql`
+const query = graphql(/* GraphQL */ `
   query Contact {
     contactPage {
       _seoMetaTags {
@@ -25,10 +25,11 @@ const query = gql`
       phoneNumber
     }
   }
-`;
+`);
+
 
 export default async function Home() {
-  const { contactPage } = await request<ContactQuery>(query);
+  const { contactPage } = await request(query);
 
   if (!contactPage) {
     return null;

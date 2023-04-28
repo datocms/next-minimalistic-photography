@@ -1,10 +1,25 @@
 'use client';
 
-import { Image } from 'react-datocms';
+import { FragmentType, graphql, getFragmentData } from '@/gql';
+import { Image as ReactDatocmsImage, ImagePropTypes } from 'react-datocms';
 
-// The Eslint rules in Next.js impose limitations on the next/image component.
-// To prevent conflicts with the Next.js Image component and avoid unnecessary
-// warnings or errors, we are giving a local alias to the DatoCMS Image
-// component, renaming it as DatoImage
+const DatoImage_responsiveImage = graphql(/* GraphQL */ `
+  fragment DatoImage_responsiveImage on ResponsiveImage {
+    src
+    srcSet
+    base64
+    width
+    height
+    alt
+    title
+  }
+`);
 
-export const DatoImage = Image;
+type Props = Omit<ImagePropTypes, 'data'> & {
+  fragment: FragmentType<typeof DatoImage_responsiveImage>
+}
+
+export default function DatoImage({ fragment, ...rest }: Props) {
+  const data = getFragmentData(DatoImage_responsiveImage, fragment);
+  return <ReactDatocmsImage {...rest} data={data} />;
+}

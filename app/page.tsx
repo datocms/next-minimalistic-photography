@@ -2,15 +2,16 @@ import { HorizontalScroller } from '@/components/HorizontalScroller';
 import { Tile } from '@/components/Tile';
 import { UnwrapStructuredText } from '@/components/UnwrapStructuredText';
 import { Photoshoot } from '@/components/Photoshoot';
-import { HomeDocument, HomeQuery } from '@/graphql/generated';
-import { gql, request } from '@/lib/dato';
+import { request } from '@/lib/dato';
 import { renderMetaTags } from 'react-datocms/seo';
 import {
   StructuredText,
   StructuredTextDocument,
 } from 'react-datocms/structured-text';
+import { graphql } from '@/gql';
 
-const query = gql`
+
+const query = graphql(/* GraphQL */ `
   query Home {
     homepage {
       _seoMetaTags {
@@ -29,29 +30,21 @@ const query = gql`
 
     photoshoots: allPhotoshoots(orderBy: position_ASC) {
       id
-      coverImage {
-        responsiveImage(imgixParams: { auto: format, h: 1400 }) {
-          src
-          srcSet
-          base64
-          width
-          height
-        }
-      }
+      ...Photoshoot_photoshoot
     }
 
     meta: _allPhotoshootsMeta {
       count
     }
   }
-`;
+`);
 
 export default async function Home() {
   const {
     homepage,
     photoshoots,
     meta: { count },
-  } = await request<HomeQuery>(query);
+  } = await request(query);
 
   return (
     <main style={{ counterReset: 'photoshoot-counter' }}>

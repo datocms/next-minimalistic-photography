@@ -1,13 +1,13 @@
-import { DatoImage } from '@/components/DatoImage';
-import { AboutQuery } from '@/graphql/generated';
-import { gql, request } from '@/lib/dato';
+import DatoImage from '@/components/DatoImage';
+import { graphql } from '@/gql';
+import { request } from '@/lib/dato';
 import { renderMetaTags } from 'react-datocms/seo';
 import {
   StructuredText,
   StructuredTextDocument,
 } from 'react-datocms/structured-text';
 
-const query = gql`
+const query = graphql(/* GraphQL */ `
   query About {
     aboutPage {
       _seoMetaTags {
@@ -25,7 +25,9 @@ const query = gql`
         value
       }
       signature {
-        url
+        responsiveImage(imgixParams: { auto: format, w: 150 }) {
+          ...DatoImage_responsiveImage
+        }
       }
       image {
         focalPoint {
@@ -33,19 +35,15 @@ const query = gql`
           y
         }
         responsiveImage(imgixParams: { auto: format, h: 1400 }) {
-          src
-          srcSet
-          base64
-          width
-          height
+          ...DatoImage_responsiveImage
         }
       }
     }
   }
-`;
+`);
 
 export default async function Home() {
-  const { aboutPage } = await request<AboutQuery>(query);
+  const { aboutPage } = await request(query);
 
   if (!aboutPage) {
     return null;
@@ -74,17 +72,15 @@ export default async function Home() {
           </div>
         </div>
         <div className="mt-10 flex">
-          <img
-            src={aboutPage.signature.url}
-            alt="Signature"
-            style={{ width: '100px' }}
+          <DatoImage
+            fragment={aboutPage.signature.responsiveImage}
           />
         </div>
       </div>
       <div className="hidden xl:block fixed inset-0 left-auto w-[45vw] 2xl:w-[50vw]">
         <DatoImage
           layout="fill"
-          data={aboutPage.image.responsiveImage}
+          fragment={aboutPage.image.responsiveImage}
           objectFit="cover"
           objectPosition={`left ${aboutPage.image.focalPoint.x * 100}% top ${aboutPage.image.focalPoint.y * 100
             }%`}
@@ -92,7 +88,7 @@ export default async function Home() {
         />
       </div>
       <div className="xl:hidden">
-        <DatoImage layout="responsive" data={aboutPage.image.responsiveImage} />
+        <DatoImage layout="responsive" fragment={aboutPage.image.responsiveImage} />
       </div>
     </main>
   );

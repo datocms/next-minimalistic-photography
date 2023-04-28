@@ -3,33 +3,13 @@ import { Playfair_Display, Poppins } from 'next/font/google';
 import { ActiveLink } from '@/components/ActiveLink';
 import { WhatsappIcon } from '@/components/WhatsappIcon';
 import { NavigationMenu } from '@/components/NavigationMenu';
-import { gql, request } from '@/lib/dato';
-import { LayoutDocument, LayoutQuery } from '@/graphql/generated';
+import { request } from '@/lib/dato';
 import { CSSProperties } from 'react';
 import type { Metadata } from 'next';
 import { renderMetaTags } from 'react-datocms/seo';
+import { graphql } from '@/gql';
 
-export const revalidate = 5;
-
-const playfairDisplay = Playfair_Display({
-  variable: '--font-playfair-display',
-  weight: '700',
-  display: 'swap',
-  subsets: ['latin'],
-});
-
-const poppins = Poppins({
-  variable: '--font-poppins',
-  display: 'swap',
-  weight: ['400', '700'],
-  subsets: ['latin'],
-});
-
-function colorToRule(color: { red: number; green: number; blue: number }) {
-  return `${color.red} ${color.green} ${color.blue}`;
-}
-
-const query = gql`
+const query = graphql(/* GraphQL */ `
   query Layout {
     site: _site {
       faviconMetaTags {
@@ -54,14 +34,34 @@ const query = gql`
       }
     }
   }
-`;
+`);
+
+export const revalidate = 5;
+
+const playfairDisplay = Playfair_Display({
+  variable: '--font-playfair-display',
+  weight: '700',
+  display: 'swap',
+  subsets: ['latin'],
+});
+
+const poppins = Poppins({
+  variable: '--font-poppins',
+  display: 'swap',
+  weight: ['400', '700'],
+  subsets: ['latin'],
+});
+
+function colorToRule(color: { red: number; green: number; blue: number }) {
+  return `${color.red} ${color.green} ${color.blue}`;
+}
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { theme, site, contactPage } = await request<LayoutQuery>(query);
+  const { theme, site, contactPage } = await request(query);
 
   return (
     <html lang="en">
