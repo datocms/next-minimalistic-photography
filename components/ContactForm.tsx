@@ -103,7 +103,7 @@ export function ContactForm({ formId }: { formId: string }) {
                 possible!
               </>
             ) : (
-              <>You probably have not setup FormSpark!</>
+              <>You probably haven&apos;t <a href="https://github.com/datocms/next-minimalistic-photography/tree/main#setup-formspark" className="underline underline-offset-4">setup FormSpark</a>?</>
             )}
           </div>
         </div>
