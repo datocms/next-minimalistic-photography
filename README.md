@@ -1,6 +1,8 @@
 # A Minimalistic Photography Portfolio website using Next.js 13 and DatoCMS
 
-This example showcases a Next.js 13 website with App Router (app) — using [DatoCMS](https://www.datocms.com/) as the data source.
+This example showcases a TypeScript Next.js 13 website with App Router (app) — using [DatoCMS](https://www.datocms.com/) as the data source.
+
+It uses the awesome [@graphql-codegen/client-preset](https://the-guild.dev/graphql/codegen/plugins/presets/preset-client) package to offer typed GraphQL queries.
 
 The purpose of this repo is to have a quick start reference that can be set up with the "one-click" button below.
 
@@ -18,9 +20,11 @@ Have a look at the end result live:
 
 2. Make sure that you have set up the [Github integration on Vercel](https://vercel.com/docs/git/vercel-for-github).
 
-3. Let DatoCMS set everything up for you clicking this button: [![Deploy with DatoCMS](https://dashboard.datocms.com/deploy/button.svg)](https://dashboard.datocms.com/deploy?repo=datocms/next-minimalistic-photography:main)
+3. Let DatoCMS set everything up for you clicking this button below:
 
-4. Setup FormSpark (see step below), which is needed for the contact form to work!
+[![Deploy with DatoCMS](https://dashboard.datocms.com/deploy/button.svg)](https://dashboard.datocms.com/deploy?repo=datocms/next-minimalistic-photography:main)
+
+:warning: Remember to setup FormSpark (see step below), as it's needed for the contact form to work!
 
 ### Setup FormSpark
 
