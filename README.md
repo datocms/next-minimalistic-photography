@@ -28,7 +28,7 @@ Have a look at the end result live:
 
 1. Signup to https://formspark.io/
 2. Create a new form - the first 250 form submissions are free!
-3. Go to Settings, and copy the Form ID
+3. Go to Settings, and [copy the Form ID](https://github.com/datocms/next-minimalistic-photography/blob/main/docs/minimalistic-photography.png)
 4. Paste the same ID in your DatoCMS project, under the "Contact Page" > "FormSpark Form ID" field.
 
 ### Local setup
