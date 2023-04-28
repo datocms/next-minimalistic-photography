@@ -13,8 +13,11 @@ import { print } from "graphql";
 // https://beta.nextjs.org/docs/data-fetching/caching#graphql-and-cache
 
 const dedupableRequest = cache(
-	async <TDocument = unknown>(payload: string): Promise<TDocument> => {
-		const request = await fetch("https://graphql.datocms.com/", {
+	async <TDocument = unknown>(
+		payload: string,
+		revalidate?: number | false,
+	): Promise<TDocument> => {
+		const response = await fetch("https://graphql.datocms.com/", {
 			headers: {
 				Authorization: `Bearer ${process.env.NEXT_DATOCMS_API_TOKEN}`,
 				"X-Exclude-Invalid": "true",
@@ -23,25 +26,31 @@ const dedupableRequest = cache(
 			method: "POST",
 			body: payload,
 			next: {
-				revalidate: 60,
+				revalidate,
 			},
 		});
 
-		if (!request.ok) {
+		if (!response.ok) {
 			throw new Error(`Failed request ${payload}`);
 		}
 
-		const result = await request.json();
+		const result = await response.json();
 
 		return result.data;
 	},
 );
 
+type RequestOptions = {
+	revalidate?: number | false;
+};
+
 export async function request<TResult = unknown, TVariables = unknown>(
 	query: TypedDocumentNode<TResult, TVariables>,
 	variables?: TVariables,
+	options?: RequestOptions,
 ): Promise<TResult> {
 	return dedupableRequest<TResult>(
 		JSON.stringify({ query: print(query), variables }),
+		options?.revalidate,
 	);
 }

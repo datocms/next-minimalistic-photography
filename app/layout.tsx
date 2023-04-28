@@ -36,8 +36,6 @@ const query = graphql(/* GraphQL */ `
   }
 `);
 
-export const revalidate = 5;
-
 const playfairDisplay = Playfair_Display({
   variable: '--font-playfair-display',
   weight: '700',
@@ -61,7 +59,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { theme, site, contactPage } = await request(query);
+  const { theme, site, contactPage } = await request(query, {}, { revalidate: 30 });
 
   return (
     <html lang="en">
