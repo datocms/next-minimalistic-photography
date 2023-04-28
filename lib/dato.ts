@@ -5,9 +5,9 @@ import { TypedDocumentNode } from "@graphql-typed-document-node/core";
 import { print } from "graphql";
 
 /*
-	POST requests are not automatically deduplicated when using fetch – only GET
-	requests are. We can use `cache` to deduplicate requests. The cache arguments
-	must be flat and only include primitives. Deep objects won’t match for deduplication.
+  POST requests are not automatically deduplicated when using fetch – only GET
+  requests are. We can use `cache` to deduplicate requests. The cache arguments
+  must be flat and only include primitives. Deep objects won’t match for deduplication.
 */
 
 // https://beta.nextjs.org/docs/data-fetching/caching#graphql-and-cache
@@ -41,6 +41,13 @@ const dedupableRequest = cache(
 );
 
 type RequestOptions = {
+	/**
+	 * Configure how the request should interact with Next.js HTTP cache. Possible values:
+	 *
+	 * * false - Cache the resource indefinitely (default)
+	 * * 0 - Prevent the resource from being cached.
+	 * * number - (in seconds) Specify the resource should have a cache lifetime of at most n seconds.
+	 */
 	revalidate?: number | false;
 };
 
