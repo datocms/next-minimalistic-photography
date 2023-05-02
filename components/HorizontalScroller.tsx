@@ -35,7 +35,7 @@ export function HorizontalScroller({ children }: { children: ReactNode }) {
 
   return (
     <div
-      className="xl:fixed xl:inset-0 xl:overflow-x-auto xl:flex xl:items-stretch"
+      className="xl:fixed xl:inset-0 xl:overflow-x-auto xl:overflow-y-hidden xl:flex xl:items-stretch"
       ref={scrollRef}
     >
       {children}
