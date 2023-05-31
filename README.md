@@ -66,7 +66,7 @@ It's strongly suggested to install the [GraphQL: Language Feature Support](https
 
 ## Troubleshooting
 
-If you're replicating this setup on DatoCMS projects created before January 1st, 2023, you might get a "Duplicate identifier" error when generating the `graphql.ts`. You can solve it by adding a `namingConvention` configuration in the `graphql.config.js` file:
+If you're replicating this setup on DatoCMS projects created before January 1st, 2023, you might get a "Duplicate identifier" error when generating the `graphql.ts` (see [product changelog](https://www.datocms.com/product-updates/api-cleanup-for-freshly-created-projects)). You can solve it by adding a `namingConvention` configuration in the `graphql.config.js` file:
 
 ```
 config: {
