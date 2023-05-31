@@ -64,3 +64,14 @@ Your blog should be up and running on [http://localhost:3000](http://localhost:3
 
 It's strongly suggested to install the [GraphQL: Language Feature Support](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql) extension, to get autocomplete suggestions, validation against schema, and many more niceties when working with your GraphQL queries.
 
+## Troubleshooting
+
+If you're replicating this setup on DatoCMS projects created before January 1st, 2023, you might get a "Duplicate identifier" error when generating the `graphql.ts`. You can solve it by adding a `namingConvention` configuration in the `graphql.config.js` file:
+
+```
+config: {
+  namingConvention: {
+    enumValues: 'keep',
+  },
+}
+```
