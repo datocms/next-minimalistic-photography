@@ -1,7 +1,5 @@
-'use client';
-
 import { FragmentType, graphql, getFragmentData } from '@/gql';
-import { Image as ReactDatocmsImage, ImagePropTypes } from 'react-datocms';
+import { Image as ReactDatocmsImage, type ImagePropTypes } from 'react-datocms';
 
 const DatoImage_responsiveImage = graphql(/* GraphQL */ `
   fragment DatoImage_responsiveImage on ResponsiveImage {
