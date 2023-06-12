@@ -45,6 +45,8 @@ export type AboutPageModelSubtitleField = {
 export type AboutPageRecord = RecordInterface & {
   __typename?: 'AboutPageRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -118,6 +120,8 @@ export type ContactPageModelContentField = {
 export type ContactPageRecord = RecordInterface & {
   __typename?: 'ContactPageRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -361,6 +365,8 @@ export type HomepageModelTaglineField = {
 export type HomepageRecord = RecordInterface & {
   __typename?: 'HomepageRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -1956,6 +1962,8 @@ export enum PhotoshootModelOrderBy {
 export type PhotoshootRecord = RecordInterface & {
   __typename?: 'PhotoshootRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -2017,7 +2025,7 @@ export type Query = {
   /** Returns meta information regarding a record collection */
   _allPhotoshootsMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
-  _allUploadsMeta?: Maybe<CollectionMetadata>;
+  _allUploadsMeta: CollectionMetadata;
   /** Returns the single instance record */
   _site: Site;
   /** Returns the single instance record */
@@ -2041,7 +2049,6 @@ export type Query = {
 
 /** The query root for this schema */
 export type Query_AllPhotoshootsMetaArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<PhotoshootModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
@@ -2130,6 +2137,8 @@ export type QueryUploadArgs = {
 
 export type RecordInterface = {
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -2242,6 +2251,8 @@ export type Tag = {
 export type ThemeRecord = RecordInterface & {
   __typename?: 'ThemeRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
