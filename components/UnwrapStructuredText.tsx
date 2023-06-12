@@ -1,5 +1,5 @@
 import { isParagraph, Record } from 'datocms-structured-text-utils';
-import { Fragment } from 'react';
+import { Fragment, ReactNode } from 'react';
 import {
   renderNodeRule,
   StructuredText,
@@ -16,7 +16,7 @@ export const UnwrapStructuredText = (
       {...props}
       customNodeRules={[
         renderNodeRule(isParagraph, ({ children, key }) => {
-          return <Fragment key={key}>{children}</Fragment>;
+          return <Fragment key={key}>{children as ReactNode}</Fragment>;
         }),
       ]}
     />
