@@ -3,52 +3,34 @@ import { Tile } from '@/components/Tile';
 import { UnwrapStructuredText } from '@/components/UnwrapStructuredText';
 import { Photoshoot } from '@/components/Photoshoot';
 import { request } from '@/lib/dato';
-import { renderMetaTags } from 'react-datocms/seo';
+import { toNextMetadata } from 'react-datocms/seo';
 import {
   StructuredText,
   StructuredTextDocument,
 } from 'react-datocms/structured-text';
-import { graphql } from '@/gql';
 
+import { Metadata } from 'next';
 
-const query = graphql(/* GraphQL */ `
-  query Home {
-    homepage {
-      _seoMetaTags {
-        tag
-        attributes
-        content
-      }
-      title
-      tagline {
-        value
-      }
-      description {
-        value
-      }
-    }
+import query from './page.graphql'
 
-    photoshoots: allPhotoshoots(orderBy: position_ASC) {
-      id
-      ...Photoshoot_photoshoot
-    }
+const getHomepageContent = async () => await request(query);
 
-    meta: _allPhotoshootsMeta {
-      count
-    }
-  }
-`);
+export async function generateMetadata(): Promise<Metadata> {
+  const { homepage } = await getHomepageContent()
+ 
+  return toNextMetadata(homepage?._seoMetaTags || [])
+}
 
 export default async function Home() {
   const {
     homepage,
     photoshoots,
     meta: { count },
-  } = await request(query);
+  } = await getHomepageContent();
 
   return (
     <main style={{ counterReset: 'photoshoot-counter' }}>
-      {renderMetaTags(homepage?._seoMetaTags || [])}
+      {/* {renderMetaTags(homepage?._seoMetaTags || [])} */}
       <HorizontalScroller>
         {homepage && (
           <Tile>

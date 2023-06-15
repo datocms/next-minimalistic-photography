@@ -1,5 +1,5 @@
 import { request } from '@/lib/dato';
-import { renderMetaTags } from 'react-datocms/seo';
+import { toNextMetadata } from 'react-datocms/seo';
 import {
   StructuredText,
   StructuredTextDocument,
@@ -7,27 +7,18 @@ import {
 import { ContactForm } from '@/components/ContactForm';
 import { WhatsappIcon } from '@/components/WhatsappIcon';
 import { generateWhatsAppLink } from '@/lib/whatsapp';
-import { graphql } from '@/gql';
 
-const query = graphql(/* GraphQL */ `
-  query Contact {
-    contactPage {
-      _seoMetaTags {
-        tag
-        attributes
-        content
-      }
-      kicker
-      title
-      content {
-        value
-      }
-      phoneNumber
-      formsparkFormId
-    }
-  }
-`);
+import { Metadata } from 'next';
 
+import query from './page.graphql'
+
+const getContactPageContent = async () => await request(query);
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { contactPage } = await getContactPageContent()
+ 
+  return toNextMetadata(contactPage?._seoMetaTags || [])
+}
 
 export default async function Home() {
   const { contactPage } = await request(query);
@@ -38,7 +29,6 @@ export default async function Home() {
 
   return (
     <main className="lg:fixed lg:inset-0 lg:flex lg:items-center lg:justify-center">
-      {renderMetaTags(contactPage._seoMetaTags)}
       <div className="mx-7 py-12 max-w-[700px] lg:m-0 lg:pr-32 lg:box-border">
         <div>
           <div className="uppercase tracking-widest text-sm mb-12 xl:mb-20">

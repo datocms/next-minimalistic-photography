@@ -1,46 +1,22 @@
 import DatoImage from '@/components/DatoImage';
-import { graphql } from '@/gql';
 import { request } from '@/lib/dato';
-import { renderMetaTags } from 'react-datocms/seo';
+import { toNextMetadata } from 'react-datocms/seo';
 import {
   StructuredText,
   StructuredTextDocument,
 } from 'react-datocms/structured-text';
 
-const query = graphql(/* GraphQL */ `
-  query About {
-    aboutPage {
-      _seoMetaTags {
-        tag
-        attributes
-        content
-      }
+import { Metadata } from 'next';
 
-      kicker
-      title
-      subtitle {
-        value
-      }
-      content {
-        value
-      }
-      signature {
-        responsiveImage(imgixParams: { auto: format, w: 150 }) {
-          ...DatoImage_responsiveImage
-        }
-      }
-      image {
-        focalPoint {
-          x
-          y
-        }
-        responsiveImage(imgixParams: { auto: format, h: 1400 }) {
-          ...DatoImage_responsiveImage
-        }
-      }
-    }
-  }
-`);
+import query from './page.graphql'
+
+const getAboutPageContent = async () => await request(query);
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { aboutPage } = await getAboutPageContent()
+ 
+  return toNextMetadata(aboutPage?._seoMetaTags || [])
+}
 
 export default async function Home() {
   const { aboutPage } = await request(query, {});
@@ -51,7 +27,6 @@ export default async function Home() {
 
   return (
     <main>
-      {renderMetaTags(aboutPage._seoMetaTags)}
       <div className="mx-7 py-12 max-w-[800px] xl:m-0 lg:w-[55vw] 2xl:w-[50vw] lg:max-w-[1100px] xl:p-32 overflow-auto xl:box-border">
         <div>
           <div className="uppercase tracking-widest text-sm mb-12 xl:mb-20 xl:mt-16">
