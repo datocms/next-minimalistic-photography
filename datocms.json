@@ -1,6 +1,6 @@
 {
 	"name": "Minimalistic Photography Website",
-	"description": "A minialistic photography portfolio website, created with Next.js 13 (appDir) and DatoCMS",
+	"description": "A minimalistic photography portfolio website, created with Next.js 13 (appDir) and DatoCMS",
 	"previewImage": "https://www.datocms-assets.com/205/1682658486-minimalistic-photography.png?w=600&auto=format",
 	"datocmsProjectId": "95283",
 	"deploymentType": "static",
