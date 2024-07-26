@@ -3,6 +3,7 @@
 👉 [Visit the DatoCMS homepage](https://www.datocms.com) or see [What is DatoCMS?](#what-is-datocms)
 
 ---
+
 <!--datocms-autoinclude-header end-->
 
 # A Minimalistic Photography Portfolio website using Next.js 13 and DatoCMS
